@@ -39,7 +39,7 @@ public class GronsfeldCipher {
     }
         
     public static void main(String[] args) {
-        String alphabet = "abcdefghijklmnopqrstuvwxyz";
+        String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         String key = "31415";
         GronsfeldCipher cipher = new GronsfeldCipher(alphabet, key);
 
