@@ -1,3 +1,4 @@
+import java.util.Scanner;
 
 // Definimi i klases
 public class GronsfeldCipher {
@@ -9,6 +10,25 @@ public class GronsfeldCipher {
         this.alphabet = alphabet;
         this.key = key;
     }
+
+
+    private String repeatKeyToMatchLength(String text) {
+        StringBuilder repeatedKey = new StringBuilder();
+        int keyIndex = 0;
+        int keyLength = key.length();
+
+        for (int i = 0; i < text.length(); i++) {
+            if (Character.isLetter(text.charAt(i))) {
+                repeatedKey.append(key.charAt(keyIndex % keyLength));
+                keyIndex++;
+            } else {
+                repeatedKey.append(' ');  // trajtimi i hapsirave
+            }
+        }
+
+        return repeatedKey.toString();
+    }
+
 
     // Encryption part
     private char encryptChar(char originalChar, char keyChar) {
@@ -39,11 +59,17 @@ public class GronsfeldCipher {
     }
         
     public static void main(String[] args) {
+        // Scanneri
+        Scanner scanner = new Scanner(System.in);
+        // Alphabet Key
         String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        String key = "31415";
-        GronsfeldCipher cipher = new GronsfeldCipher(alphabet, key);
+        String key = "3156";
 
-        String plaintext = "HELLO WORLD";
-        System.out.println("Original: " + plaintext);
+        GronsfeldCipher gronsfeldCipher = new GronsfeldCipher(alphabet, key);
+
+        System.out.print("Ju lutem jepni tekstin për të enkriptuar: ");
+        String plaintext = scanner.nextLine();
+        String encryptedText = gronsfeldCipher.encrypt(plaintext);
+        System.out.println("Teksti i enkriptuar: " + encryptedText);
     }
 }
