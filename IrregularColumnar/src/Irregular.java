@@ -22,6 +22,34 @@ public class Irregular {
         }
     }
 
+    // Metoda per enkriptim
+    static String encryptMessage(String msg) {
+        int col = key.length();
+        int row = (int) Math.ceil((double) msg.length() / col);
+        char[][] matrix = new char[row][col];
+        int msgIndex = 0;
+
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                if (msgIndex < msg.length()) {
+                    matrix[i][j] = msg.charAt(msgIndex++);
+                } else {
+                    matrix[i][j] = '\0';  // mbushja me karakterin null ndryshimi me Columnar
+                }
+            }
+        }
+
+        StringBuilder cipherText = new StringBuilder();
+        for (int idx : sortedKeyIndex) {
+            for (int i = 0; i < row; i++) {
+                if (matrix[i][idx] != '\0') {
+                    cipherText.append(matrix[i][idx]);
+                }
+            }
+        }
+
+        return cipherText.toString();
+    }
     // Metoda main
     public static void main(String[] args) {
         // Scanneri
