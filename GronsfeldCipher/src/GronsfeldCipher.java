@@ -1,4 +1,4 @@
-//
+
 // Definimi i klases
 public class GronsfeldCipher {
     private String alphabet;
