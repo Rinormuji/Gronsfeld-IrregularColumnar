@@ -54,10 +54,13 @@ public class Irregular {
     public static void main(String[] args) {
         // Scanneri
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Qa po doni me enkriptu: ");
+        System.out.print("Ju lutem jepni tekstin për të enkriptuar: ");
         String msg = scanner.nextLine();
 
         setPermutationOrder();
+
+        String cipher = encryptMessage(msg);
+        System.out.println("Teksti i enkriptuar: " + cipher);
 
         scanner.close();
     }
