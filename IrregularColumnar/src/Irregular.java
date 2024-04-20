@@ -52,7 +52,7 @@ public class Irregular {
     }
     // Metoda main
     public static void main(String[] args) {
-        // Scanneri
+        // Scanner
         Scanner scanner = new Scanner(System.in);
         System.out.print("Ju lutem jepni tekstin për të enkriptuar: ");
         String msg = scanner.nextLine();
