@@ -57,6 +57,37 @@ public class GronsfeldCipher {
 
         return ciphertext.toString();
     }
+     private char decryptChar(char encryptedChar, char keyChar) {
+
+        if (!Character.isLetter(encryptedChar)) {
+
+            return encryptedChar;
+
+        }
+
+        int alphabetIndex = alphabet.indexOf(Character.toUpperCase(encryptedChar));
+        int keyOffset = keyChar - '0';
+        int decryptedIndex = (alphabetIndex - keyOffset + alphabet.length()) % alphabet.length();
+        char decryptedChar = alphabet.charAt(decryptedIndex);
+        return Character.isLowerCase(encryptedChar) ? Character.toLowerCase(decryptedChar) : decryptedChar;
+
+    }
+
+    public String decrypt(String ciphertext) {
+
+        StringBuilder decryptedText = new StringBuilder();
+        String repeatedKey = repeatKeyToMatchLength(ciphertext);
+
+        for (int i = 0; i < ciphertext.length(); i++) {
+
+            char encryptedChar = ciphertext.charAt(i);
+            char originalChar = decryptChar(encryptedChar, repeatedKey.charAt(i));
+            decryptedText.append(originalChar);
+        }
+
+        return decryptedText.toString();
+
+    }
         
     public static void main(String[] args) {
         // Scanneri
@@ -71,5 +102,15 @@ public class GronsfeldCipher {
         String plaintext = scanner.nextLine();
         String encryptedText = gronsfeldCipher.encrypt(plaintext);
         System.out.println("Teksti i enkriptuar: " + encryptedText);
+
+         String decrypted = gronsfeldCipher.decrypt(encryptedText);
+
+        System.out.println("Teksti i dekriptuar: " + decrypted);
+
+        //System.out.print("Ju lutem jepni tekstin për të dekriptuar: ");
+        //String ciphertextToDecrypt = scanner.nextLine();
+        //String decryptedText = gronsfeldCipher.decrypt(ciphertextToDecrypt);
+        //System.out.println("Teksti i dekriptuar: " + decryptedText);
+       scanner.close();
     }
 }
