@@ -50,6 +50,47 @@ public class Irregular {
 
         return cipherText.toString();
     }
+
+    //dekriptimi
+    static String decryptMessage(String cipher) {
+        int col = key.length();
+        int row = (int) Math.ceil((double) cipher.length() / col);
+        char[][] matrix = new char[row][col];
+
+        // percakton se sa karaktere duhet te kete çdo kolone
+        int[] charCountPerColumn = new int[col];
+        int fullCols = cipher.length() % col;  
+
+        for (int i = 0; i < col; i++) {
+            if (i < fullCols) {
+                charCountPerColumn[i] = row; 
+            } else {
+                charCountPerColumn[i] = row - 1; 
+            }
+        }
+
+        // mbush matricen kolone sipas rregullit te sortimit ne baze te çelesit
+        int charIndex = 0;
+        for (int k = 0; k < col; k++) {
+            int currentColumn = sortedKeyIndex.get(k);
+            for (int i = 0; i < charCountPerColumn[currentColumn]; i++) {
+                matrix[i][currentColumn] = cipher.charAt(charIndex++);
+            }
+        }
+
+        // rikrijo mesazhin rresht pas rreshtit
+        StringBuilder plainText = new StringBuilder();
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                if (matrix[i][j] != '\0') {
+                    plainText.append(matrix[i][j]);
+                }
+            }
+        }
+
+        return plainText.toString();
+    }
+
     // Metoda main
     public static void main(String[] args) {
         // Scanner
@@ -61,6 +102,9 @@ public class Irregular {
 
         String cipher = encryptMessage(msg);
         System.out.println("Teksti i enkriptuar: " + cipher);
+
+        String decryptedMsg = decryptMessage(cipher);
+        System.out.println("Decrypted Message: " + decryptedMsg);
 
         scanner.close();
     }
