@@ -1,1 +1,5 @@
 # Gronsfeld Cipher
+
+Gronsfeld Cipher është një metodë e thjeshtë e enkriptimit të tekstit, e cila është e ngjashme me Vigenere Cipher. Megjithatë, dallohet për shkak të përdorimit të çelësave numerikë në krahasim me një çelës të bazuar në shkronja. Kjo metodë përdor një sekuencë numrash për të diktuar numrin e ndërrimeve per cdo karakter ne plaintext. Në këte rast, cdo shifër në celës lidhet drejtpërdrejt me një zhvendosje specifike në alfabet.
+
+Le ta ilustrojmë këtë me një shembull. Supozojmë se kemi zgjedhur të perdorim celësin "123" dhe teksti që duam ta enkriptojmë është "HELLO". Shkronja e par 'H' do te zhvendoset me 1 vend ne alfabet, duke e shndërruar atë në 'I'. Shkronja pasuese 'E' zhvendoset me 2 vende, duke rezultuar në 'G'. Shkronja e tretë 'L' pëson nje zhvendosje me 3 vende, duke u bërë tani 'O'. Kur arrijmë shkronjën e katërt 'L', fillojmë përsëri nga fillimi i celësit, kështu që ai zhvendoset përsëri me 1 vend, duke rezultuar në 'M'. Së fundi, shkronja e pestë 'O', zhvendoset me 2 vende, duke e kthyer atë në 'Q'. **Si i tillë, teksti origjinal "HELLO" tani është koduar në tekstin e koduar "IGOMQ"**.
