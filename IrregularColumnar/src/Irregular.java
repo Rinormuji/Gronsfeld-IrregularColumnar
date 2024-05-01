@@ -12,7 +12,6 @@ public class Irregular {
         for (int i = 0; i < key.length(); i++) {
             keyMap.put(key.charAt(i), i);
         }
-
     }
 
     // Metoda per enkriptim
