@@ -103,14 +103,9 @@ public class GronsfeldCipher {
         String encryptedText = gronsfeldCipher.encrypt(plaintext);
         System.out.println("Teksti i enkriptuar: " + encryptedText);
 
-         String decrypted = gronsfeldCipher.decrypt(encryptedText);
-
+        String decrypted = gronsfeldCipher.decrypt(encryptedText);
         System.out.println("Teksti i dekriptuar: " + decrypted);
 
-        //System.out.print("Ju lutem jepni tekstin për të dekriptuar: ");
-        //String ciphertextToDecrypt = scanner.nextLine();
-        //String decryptedText = gronsfeldCipher.decrypt(ciphertextToDecrypt);
-        //System.out.println("Teksti i dekriptuar: " + decryptedText);
        scanner.close();
     }
 }

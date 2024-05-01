@@ -1,25 +1,18 @@
 import java.util.*;
 public class Irregular {
-    static final String key = "HACKER";  // celesi
+    static final String key = "HACK";  // celesi
     static Map<Character, Integer> keyMap = new TreeMap<>();
-    static List<Integer> sortedKeyIndex = new ArrayList<>();
+
 
 
     // Metoda per te caktu vendin e permutacionit
     static void setPermutationOrder() {
         keyMap.clear();
-        sortedKeyIndex.clear();
 
         for (int i = 0; i < key.length(); i++) {
             keyMap.put(key.charAt(i), i);
         }
 
-        List<Map.Entry<Character, Integer>> sortedEntries = new ArrayList<>(keyMap.entrySet());
-        sortedEntries.sort(Map.Entry.comparingByKey());
-
-        for (Map.Entry<Character, Integer> entry : sortedEntries) {
-            sortedKeyIndex.add(entry.getValue());
-        }
     }
 
     // Metoda per enkriptim
@@ -34,17 +27,15 @@ public class Irregular {
                 if (msgIndex < msg.length()) {
                     matrix[i][j] = msg.charAt(msgIndex++);
                 } else {
-                    matrix[i][j] = '\0';  // mbushja me karakterin null ndryshimi me Columnar
+                    matrix[i][j] = ' ';  // mbushja me karakterin null ndryshimi me Columnar
                 }
             }
         }
 
         StringBuilder cipherText = new StringBuilder();
-        for (int idx : sortedKeyIndex) {
+        for (int idx : keyMap.values()) {
             for (int i = 0; i < row; i++) {
-                if (matrix[i][idx] != '\0') {
-                    cipherText.append(matrix[i][idx]);
-                }
+                cipherText.append(matrix[i][idx]);
             }
         }
 
@@ -56,35 +47,18 @@ public class Irregular {
         int col = key.length();
         int row = (int) Math.ceil((double) cipher.length() / col);
         char[][] matrix = new char[row][col];
-
-        // percakton se sa karaktere duhet te kete çdo kolone
-        int[] charCountPerColumn = new int[col];
-        int fullCols = cipher.length() % col;  
-
-        for (int i = 0; i < col; i++) {
-            if (i < fullCols) {
-                charCountPerColumn[i] = row; 
-            } else {
-                charCountPerColumn[i] = row - 1; 
-            }
-        }
-
-        // mbush matricen kolone sipas rregullit te sortimit ne baze te çelesit
         int charIndex = 0;
-        for (int k = 0; k < col; k++) {
-            int currentColumn = sortedKeyIndex.get(k);
-            for (int i = 0; i < charCountPerColumn[currentColumn]; i++) {
-                matrix[i][currentColumn] = cipher.charAt(charIndex++);
+
+        for (int idx : keyMap.values()) {
+            for (int i = 0; i < row; i++) {
+                matrix[i][idx] = cipher.charAt(charIndex++);
             }
         }
-
         // rikrijo mesazhin rresht pas rreshtit
         StringBuilder plainText = new StringBuilder();
         for (int i = 0; i < row; i++) {
-            for (int j = 0; j < col; j++) {
-                if (matrix[i][j] != '\0') {
+            for (int j = 0; j < col; j++)  {
                     plainText.append(matrix[i][j]);
-                }
             }
         }
 
@@ -109,4 +83,3 @@ public class Irregular {
         scanner.close();
     }
 }
-
