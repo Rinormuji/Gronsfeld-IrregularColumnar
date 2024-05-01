@@ -40,7 +40,6 @@ public class Irregular {
 
         return cipherText.toString();
     }
-
     //dekriptimi
     static String decryptMessage(String cipher) {
         int col = key.length();
